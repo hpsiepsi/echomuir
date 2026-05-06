@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Echomuir — Music tools for bagpipers and musicians</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-dark: #0a1428;
+      --bg-slate: #1a2749;
+      --text-light: #e8eef5;
+      --text-muted: #a8b5c8;
+      --accent-gold: #d4a574;
+      --accent-rust: #a85c4d;
+      --border-subtle: rgba(216, 165, 116, 0.15);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    header {
+      padding: 2rem 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      background: rgba(10, 20, 40, 0.95);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: var(--accent-gold);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      font-size: 14px;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--accent-gold);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 4rem 0;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem;
+      gap: 2rem;
+    }
+
+    .mark-container {
+      width: 180px;
+      height: 180px;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 500;
+      letter-spacing: -1px;
+      max-width: 600px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 550px;
+      margin-top: 1rem;
+    }
+
+    .tagline {
+      color: var(--accent-gold);
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: 32px;
+      font-weight: 500;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .mission {
+      background-color: var(--bg-slate);
+      padding: 3rem;
+      border-radius: 8px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .mission h2 {
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      color: var(--accent-gold);
+    }
+
+    .mission p {
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .app-card {
+      background-color: var(--bg-slate);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      transition: border-color 0.2s, background-color 0.2s;
+    }
+
+    .app-card:hover {
+      border-color: var(--accent-gold);
+      background-color: rgba(26, 39, 73, 0.8);
+    }
+
+    .app-icon {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1.5rem;
+      background-color: rgba(212, 165, 116, 0.1);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+    }
+
+    .app-card h3 {
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .app-function {
+      font-size: 13px;
+      color: var(--accent-gold);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .app-card p {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .cta-button {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      background-color: transparent;
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      border-radius: 4px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .cta-button:hover {
+      background-color: var(--accent-gold);
+      color: var(--bg-dark);
+    }
+
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 3rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-top: 4rem;
+    }
+
+    footer p {
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-gold);
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      nav ul {
+        display: none;
+      }
+
+      section {
+        padding: 3rem 0;
+      }
+
+      .mission {
+        padding: 2rem;
+      }
+
+      .apps-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <div class="logo">Echomuir</div>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#apps">Apps</a></li>
+        <li><a href="/support.html">Support</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="mark-container">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sky-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#1a2749;stop-opacity:1" />
+              <stop offset="50%" style="stop-color:#0d1a35;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#050d1a;stop-opacity:1" />
+            </linearGradient>
+            <filter id="fog">
+              <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="4" seed="2" />
+              <feDisplacementMap in="SourceGraphic" scale="3" />
+            </filter>
+          </defs>
+
+          <!-- Background sky -->
+          <rect width="200" height="200" fill="url(#sky-gradient)" />
+
+          <!-- Fog layer -->
+          <ellipse cx="100" cy="140" rx="95" ry="60" fill="rgba(168, 181, 200, 0.08)" filter="url(#fog)" />
+
+          <!-- Tree trunks (dead, thin) -->
+          <line x1="70" y1="180" x2="62" y2="80" stroke="#8a9ab3" stroke-width="2" opacity="0.7" />
+          <line x1="100" y1="185" x2="100" y2="60" stroke="#8a9ab3" stroke-width="2.5" opacity="0.8" />
+          <line x1="130" y1="180" x2="138" y2="85" stroke="#8a9ab3" stroke-width="2" opacity="0.65" />
+
+          <!-- Moon or sunrise glow -->
+          <circle cx="100" cy="45" r="18" fill="rgba(212, 165, 116, 0.15)" opacity="0.6" />
+          <circle cx="100" cy="45" r="15" fill="none" stroke="#d4a574" stroke-width="0.5" opacity="0.4" />
+
+          <!-- Subtle mist over landscape -->
+          <ellipse cx="100" cy="170" rx="90" ry="25" fill="rgba(212, 165, 116, 0.04)" />
+        </svg>
+      </div>
+
+      <div class="tagline">Music tools for musicians</div>
+      <h1>Echomuir</h1>
+      <p>Precision instruments for bagpipers and musicians, drawn from Scottish landscape and studio craftsmanship.</p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <div class="mission">
+        <h2>About Echomuir</h2>
+        <p>We build focused, premium music tools for practice and precision. Each app combines atmospheric design with clear function—no bloat, no compromise. Tools designed to feel like they belong in a studio, built with the care of someone who practices every day.</p>
+      </div>
+    </section>
+
+    <!-- Apps Section -->
+    <section id="apps">
+      <h2 class="section-title">Apps</h2>
+
+      <div class="apps-grid">
+
+        <!-- LochTone -->
+        <div class="app-card">
+          <div class="app-icon"></div>
+          <h3>LochTone</h3>
+          <div class="app-function">Tuning</div>
+          <p>Precision bagpipe tuning. Lock in your tone with crystal clarity—no guessing, no fuss. Professional-grade accuracy in your pocket.</p>
+          <a href="#" class="cta-button">Learn more</a>
+        </div>
+
+        <!-- LinneNome -->
+        <div class="app-card">
+          <div class="app-icon"></div>
+          <h3>LinneNome</h3>
+          <div class="app-function">Metronome</div>
+          <p>A metronome built for precision practice. Responsive, clean, and steady—your practice rhythm, nothing else.</p>
+          <a href="#" class="cta-button">Learn more</a>
+        </div>
+
+        <!-- Eastinoto Drums -->
+        <div class="app-card">
+          <div class="app-icon"></div>
+          <h3>Eastinoto Drums</h3>
+          <div class="app-function">Repetition Practice</div>
+          <p>Master patterns through repetition. Looping practice engine for drummers and percussionists. Build muscle memory, refine technique.</p>
+          <a href="#" class="cta-button">Learn more</a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="contact">
+    <p>Echomuir LLC</p>
+    <div class="footer-links">
+      <a href="mailto:studio@echomuir.com">studio@echomuir.com</a>
+      <a href="mailto:help@echomuir.com">help@echomuir.com</a>
+    </div>
+    <p style="margin-top: 2rem; font-size: 13px; color: var(--text-muted);">Made with care in Elmira, NY</p>
+  </footer>
+
+</body>
+</html>
